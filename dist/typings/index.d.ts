@@ -57,7 +57,7 @@ declare module "erela.js/structures/Player" {
             vaporwave: boolean;
             pop: boolean;
             soft: boolean;
-            trebblebass: boolean;
+            treblebass: boolean;
             eightD: boolean;
             karaoke: boolean;
             vibrato: boolean;
@@ -70,7 +70,7 @@ declare module "erela.js/structures/Player" {
         setVaporwave(status?: boolean): this;
         setPop(status?: boolean): this;
         setSoft(status?: boolean): this;
-        setTrebbleBass(status?: boolean): this;
+        setTrebleBass(status?: boolean): this;
         setEightD(status?: boolean): this;
         setKaraoke(status?: boolean): this;
         setVibrato(status?: boolean): this;

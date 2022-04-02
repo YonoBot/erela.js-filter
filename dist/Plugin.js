@@ -17,13 +17,13 @@ class Player extends erela_js_1.Structure.get("Player") {
             vaporwave: false,
             pop: false,
             soft: false,
-            trebblebass: false,
+            treblebass: false,
             eightD: false,
             karaoke: false,
             vibrato: false,
             earrape: false,
             tremolo: false,
-            distortion: false
+            distortion: false,
         };
     }
     /**
@@ -42,7 +42,7 @@ class Player extends erela_js_1.Structure.get("Player") {
         this.filtersData.timescale = {
             speed: 1.0,
             pitch: 1.2,
-            rate: 1.0
+            rate: 1.0,
         };
         return this.updateFilters();
     }
@@ -79,7 +79,10 @@ class Player extends erela_js_1.Structure.get("Player") {
         this.filters.daycore = false;
         this.filters.nightcore = false;
         this.filters.tremolo = false;
-        this.filtersData.equalizer = [{ band: 1, gain: 0.3 }, { band: 0, gain: 0.3 }];
+        this.filtersData.equalizer = [
+            { band: 1, gain: 0.3 },
+            { band: 0, gain: 0.3 },
+        ];
         this.filtersData.timescale = { pitch: 0.5 };
         this.filtersData.tremolo = { depth: 0.3, frequency: 14 };
         return this.updateFilters();
@@ -96,7 +99,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             return this.updateFilters();
         }
         this.filters.pop = true;
-        this.filters.trebblebass = false;
+        this.filters.treblebass = false;
         this.filtersData.equalizer = [
             { band: 0, gain: 0.65 },
             { band: 1, gain: 0.45 },
@@ -111,7 +114,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             { band: 10, gain: 0 },
             { band: 11, gain: 0 },
             { band: 12, gain: 0 },
-            { band: 13, gain: 0 }
+            { band: 13, gain: 0 },
         ];
         return this.updateFilters();
     }
@@ -131,17 +134,17 @@ class Player extends erela_js_1.Structure.get("Player") {
         return this.updateFilters();
     }
     /**
-     * Set filter to trebblebass
+     * Set filter to treblebass
      * @param {boolean} [status = true] The status is enabled or disabled
      * @returns {Player}
      */
-    setTrebbleBass(status = true) {
+    setTrebleBass(status = true) {
         if (!status) {
-            this.filters.trebblebass = false;
+            this.filters.treblebass = false;
             this.filtersData.equalizer = [];
             return this.updateFilters();
         }
-        this.filters.trebblebass = true;
+        this.filters.treblebass = true;
         this.filters.pop = false;
         this.filtersData.equalizer = [
             { band: 0, gain: 0.6 },
@@ -157,7 +160,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             { band: 10, gain: 0.55 },
             { band: 11, gain: 0.6 },
             { band: 12, gain: 0.55 },
-            { band: 13, gain: 0 }
+            { band: 13, gain: 0 },
         ];
         return this.updateFilters();
     }
@@ -192,7 +195,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             level: 1.0,
             monoLevel: 1.0,
             filterBand: 220.0,
-            filterWidth: 100.0
+            filterWidth: 100.0,
         };
         return this.updateFilters();
     }
@@ -241,8 +244,12 @@ class Player extends erela_js_1.Structure.get("Player") {
         }
         this.filters.earrape = true;
         this.filters.pop = false;
-        this.filters.trebblebass = false;
-        this.filtersData.equalizer = [...Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.5 }))];
+        this.filters.treblebass = false;
+        this.filtersData.equalizer = [
+            ...Array(6)
+                .fill(0)
+                .map((n, i) => ({ band: i, gain: 0.5 })),
+        ];
         this.filtersData.volume = 5.0;
         return this.updateFilters();
     }
@@ -259,7 +266,14 @@ class Player extends erela_js_1.Structure.get("Player") {
         }
         this.filters.distortion = true;
         this.filtersData.distortion = {
-            sinOffset: 0, sinScale: 1, cosOffset: 0, cosScale: 1, tanOffset: 0, tanScale: 1, offset: 0, scale: 1
+            sinOffset: 0,
+            sinScale: 1,
+            cosOffset: 0,
+            cosScale: 1,
+            tanOffset: 0,
+            tanScale: 1,
+            offset: 0,
+            scale: 1,
         };
         return this.updateFilters();
     }
@@ -269,7 +283,7 @@ class Player extends erela_js_1.Structure.get("Player") {
      * @returns {Player}
      */
     updateFilters(seek = true) {
-        const { volume, equalizer, karaoke, timescale, tremolo, vibrato, rotation, distortion } = this.filtersData;
+        const { volume, equalizer, karaoke, timescale, tremolo, vibrato, rotation, distortion, } = this.filtersData;
         void this.node.send({
             op: "filters",
             guildId: this.guild,
@@ -280,21 +294,21 @@ class Player extends erela_js_1.Structure.get("Player") {
             tremolo,
             vibrato,
             rotation,
-            distortion
+            distortion,
         });
         if (!seek)
             return this;
         return this.seek(this.position);
     }
     /**
-    * Clear applied filter(s)
+     * Clear applied filter(s)
      * @param {boolean} [seek = true] Should the music seeked or no
      * @returns {Player}
      */
     clearFilters(seek = true) {
         void this.node.send({
             op: "filters",
-            guildId: this.guild
+            guildId: this.guild,
         });
         this.filtersData = new filterConstants_1.filterConstants();
         this.filters = {
@@ -303,13 +317,13 @@ class Player extends erela_js_1.Structure.get("Player") {
             vaporwave: false,
             pop: false,
             soft: false,
-            trebblebass: false,
+            treblebass: false,
             eightD: false,
             karaoke: false,
             vibrato: false,
             earrape: false,
             tremolo: false,
-            distortion: false
+            distortion: false,
         };
         if (!seek)
             return this;

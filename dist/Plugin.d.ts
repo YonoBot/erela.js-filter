@@ -14,7 +14,7 @@ declare class Player extends Player_base {
         vaporwave: boolean;
         pop: boolean;
         soft: boolean;
-        trebblebass: boolean;
+        treblebass: boolean;
         eightD: boolean;
         karaoke: boolean;
         vibrato: boolean;
@@ -53,11 +53,11 @@ declare class Player extends Player_base {
      */
     setSoft(status?: boolean): this;
     /**
-     * Set filter to trebblebass
+     * Set filter to treblebass
      * @param {boolean} [status = true] The status is enabled or disabled
      * @returns {Player}
      */
-    setTrebbleBass(status?: boolean): this;
+    setTrebleBass(status?: boolean): this;
     /**
      * Set filter to 8D
      * @param {boolean} [status = true] The status is enabled or disabled
@@ -101,7 +101,7 @@ declare class Player extends Player_base {
      */
     updateFilters(seek?: boolean): this;
     /**
-    * Clear applied filter(s)
+     * Clear applied filter(s)
      * @param {boolean} [seek = true] Should the music seeked or no
      * @returns {Player}
      */
