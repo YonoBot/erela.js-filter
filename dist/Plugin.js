@@ -284,9 +284,7 @@ class Player extends erela_js_1.Structure.get("Player") {
      */
     updateFilters(seek = true) {
         const { volume, equalizer, karaoke, timescale, tremolo, vibrato, rotation, distortion, } = this.filtersData;
-        void this.node.send({
-            op: "filters",
-            guildId: this.guild,
+        const filterData = {
             volume,
             equalizer,
             karaoke,
@@ -295,7 +293,31 @@ class Player extends erela_js_1.Structure.get("Player") {
             vibrato,
             rotation,
             distortion,
+        };
+        Array.from(Object.entries({
+            volume,
+            equalizer,
+            karaoke,
+            timescale,
+            tremolo,
+            vibrato,
+            rotation,
+            distortion,
+        })).forEach(([key, value]) => {
+            switch (typeof value) {
+                case "object": {
+                    if (Array.isArray(value) && value.length == 0) {
+                        delete filterData[key];
+                    }
+                    else {
+                        if (Object.keys(filterData).length == 0) {
+                            delete filterData[key];
+                        }
+                    }
+                }
+            }
         });
+        void this.node.send(Object.assign({ op: "filters", guildId: this.guild }, filterData));
         if (!seek)
             return this;
         return this.seek(this.position);
