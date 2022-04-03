@@ -304,7 +304,6 @@ class Player extends Structure.get("Player") {
 			rotation,
 			distortion
 		};
-		console.debug("before", JSON.stringify(filterData, null, 2));
 		Array.from(
 			Object.entries({
 				volume,
@@ -320,16 +319,15 @@ class Player extends Structure.get("Player") {
 			switch (typeof value) {
 				case "object": {
 					if (Array.isArray(value) && value.length == 0) {
-						delete filterData[key];
+						filterData[key] = undefined;
 					} else {
 						if (Object.keys(filterData).length == 0) {
-							delete filterData[key];
+							filterData[key] = undefined;
 						}
 					}
 				}
 			}
 		});
-		console.debug("after", JSON.stringify(filterData, null, 2));
 		void this.node.send({
 			op: "filters",
 			guildId: this.guild,
