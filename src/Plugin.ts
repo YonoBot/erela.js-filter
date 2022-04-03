@@ -304,6 +304,7 @@ class Player extends Structure.get("Player") {
 			rotation,
 			distortion
 		};
+		console.debug("before", JSON.stringify(filterData, null, 2));
 		Array.from(
 			Object.entries({
 				volume,
@@ -328,6 +329,7 @@ class Player extends Structure.get("Player") {
 				}
 			}
 		});
+		console.debug("after", JSON.stringify(filterData, null, 2));
 		void this.node.send({
 			op: "filters",
 			guildId: this.guild,
