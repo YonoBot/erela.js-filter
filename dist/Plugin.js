@@ -309,28 +309,22 @@ class Player extends erela_js_1.Structure.get("Player") {
 			rotation,
 			distortion
 		};
-		Array.from(
-			Object.entries({
-				volume,
-				equalizer,
-				karaoke,
-				timescale,
-				tremolo,
-				vibrato,
-				rotation,
-				distortion
-			})
-		).forEach(([key, value]) => {
-			switch (typeof value) {
-				case "object": {
-					if (Array.isArray(value) && value.length == 0) {
-						filterData[key] = undefined;
-					} else {
-						if (Object.keys(filterData).length == 0) {
-							filterData[key] = undefined;
-						}
-					}
-				}
+		Object.keys({
+			volume,
+			equalizer,
+			karaoke,
+			timescale,
+			tremolo,
+			vibrato,
+			rotation,
+			distortion
+		}).forEach((key) => {
+			if (
+				!filterData[key] ||
+				filterData[key] === undefined ||
+				(Array.isArray(filterData[key]) && filterData[key].length === 0)
+			) {
+				filterData[key] = undefined;
 			}
 		});
 		void this.node.send(
