@@ -2,13 +2,13 @@ import { filtersData } from "../typings";
 
 export class filterConstants {
 	public volume = 1.0;
-	public equalizer = this.filterOptions?.equalizer ?? null;
-	public karaoke = this.filterOptions?.karaoke ?? null;
-	public timescale = this.filterOptions?.timescale ?? null;
-	public tremolo = this.filterOptions?.tremolo ?? null;
-	public vibrato = this.filterOptions?.vibrato ?? null;
-	public rotation = this.filterOptions?.rotation ?? null;
-	public distortion = this.filterOptions?.distortion ?? null;
-	public lowpass = this.filterOptions?.lowpass ?? null;
+	public equalizer = this.filterOptions?.equalizer ?? [];
+	public karaoke = this.filterOptions?.karaoke ?? {};
+	public timescale = this.filterOptions?.timescale ?? {};
+	public tremolo = this.filterOptions?.tremolo ?? {};
+	public vibrato = this.filterOptions?.vibrato ?? {};
+	public rotation = this.filterOptions?.rotation ?? {};
+	public distortion = this.filterOptions?.distortion ?? {};
+	public lowpass = this.filterOptions?.lowpass ?? {};
 	public constructor(public filterOptions?: filtersData) {}
 }
