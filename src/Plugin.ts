@@ -288,8 +288,12 @@ class Player extends Structure.get("Player") {
 		this.set("beforeDeleteFilters", filtersData);
 		Object.keys(this.filtersData).forEach((key) => {
 			if (
-				this.filtersData[key] ||
-				(Array.isArray(this.filtersData[key]) &&
+				(this.filtersData[key] && typeof this.filtersData[key] !== "object") ||
+				(this.filtersData[key] &&
+					typeof this.filtersData[key] === "object" &&
+					Object.keys(this.filtersData[key]).length > 0) ||
+				(this.filtersData[key] &&
+					Array.isArray(this.filtersData[key]) &&
 					this.filtersData[key].length > 0)
 			) {
 				filtersData[key] = this.filtersData[key];
