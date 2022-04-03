@@ -103,9 +103,9 @@ class Player extends Structure.get("Player") {
 		this.filtersData.equalizer = [
 			{ band: 0, gain: 0.65 },
 			{ band: 1, gain: 0.45 },
-			{ band: 2, gain: -0.45 },
-			{ band: 3, gain: -0.65 },
-			{ band: 4, gain: -0.35 },
+			{ band: 2, gain: -0.25 },
+			{ band: 3, gain: -0.25 },
+			{ band: 4, gain: -0.25 },
 			{ band: 5, gain: 0.45 },
 			{ band: 6, gain: 0.55 },
 			{ band: 7, gain: 0.6 },
