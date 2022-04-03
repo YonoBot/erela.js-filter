@@ -290,7 +290,6 @@ class Player extends erela_js_1.Structure.get("Player") {
 	 */
 	updateFilters(seek = true) {
 		let filtersData = {};
-		this.set("beforeDeleteFilters", filtersData);
 		Object.keys(this.filtersData).forEach((key) => {
 			if (
 				(this.filtersData[key] && typeof this.filtersData[key] !== "object") ||
@@ -304,7 +303,6 @@ class Player extends erela_js_1.Structure.get("Player") {
 				filtersData[key] = this.filtersData[key];
 			}
 		});
-		this.set("afterDeleteFilters", filtersData);
 		void this.node.send(
 			Object.assign({ op: "filters", guildId: this.guild }, filtersData)
 		);

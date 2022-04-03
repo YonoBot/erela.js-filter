@@ -285,7 +285,6 @@ class Player extends Structure.get("Player") {
 	 */
 	public updateFilters(seek: boolean = true): this {
 		let filtersData = {};
-		this.set("beforeDeleteFilters", filtersData);
 		Object.keys(this.filtersData).forEach((key) => {
 			if (
 				(this.filtersData[key] && typeof this.filtersData[key] !== "object") ||
@@ -299,7 +298,6 @@ class Player extends Structure.get("Player") {
 				filtersData[key] = this.filtersData[key];
 			}
 		});
-		this.set("afterDeleteFilters", filtersData);
 		void this.node.send({
 			op: "filters",
 			guildId: this.guild,
