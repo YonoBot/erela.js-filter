@@ -284,24 +284,22 @@ class Player extends Structure.get("Player") {
 	 * @returns {Player}
 	 */
 	public updateFilters(seek: boolean = true): this {
-		const filterData = {
-			...this.filtersData
-		};
-		this.set("beforeDeleteFilters", filterData);
-		Object.keys(filterData).forEach((key) => {
+		let filtersData = {};
+		this.set("beforeDeleteFilters", filtersData);
+		Object.keys(this.filtersData).forEach((key) => {
 			if (
-				!filterData[key] ||
-				filterData[key] === undefined ||
-				(Array.isArray(filterData[key]) && filterData[key].length === 0)
+				this.filtersData[key] ||
+				(Array.isArray(this.filtersData[key]) &&
+					this.filtersData[key].length > 0)
 			) {
-				delete filterData[key];
+				filtersData[key] = this.filtersData[key];
 			}
 		});
-		this.set("afterDeleteFilters", filterData);
+		this.set("afterDeleteFilters", filtersData);
 		void this.node.send({
 			op: "filters",
 			guildId: this.guild,
-			...filterData
+			...filtersData
 		});
 		if (!seek) return this;
 		return this.seek(this.position);
