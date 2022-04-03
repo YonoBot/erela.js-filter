@@ -289,44 +289,18 @@ class Player extends erela_js_1.Structure.get("Player") {
 	 * @returns {Player}
 	 */
 	updateFilters(seek = true) {
-		const {
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
-		} = this.filtersData;
-		const filterData = {
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
-		};
-		Object.keys({
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
-		}).forEach((key) => {
+		const filterData = Object.assign({}, this.filtersData);
+		this.set("beforeDeleteFilters", filterData);
+		Object.keys(filterData).forEach((key) => {
 			if (
 				!filterData[key] ||
 				filterData[key] === undefined ||
 				(Array.isArray(filterData[key]) && filterData[key].length === 0)
 			) {
-				filterData[key] = undefined;
+				delete filterData[key];
 			}
 		});
+		this.set("afterDeleteFilters", filterData);
 		void this.node.send(
 			Object.assign({ op: "filters", guildId: this.guild }, filterData)
 		);

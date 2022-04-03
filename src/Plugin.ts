@@ -284,44 +284,20 @@ class Player extends Structure.get("Player") {
 	 * @returns {Player}
 	 */
 	public updateFilters(seek: boolean = true): this {
-		const {
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
-		} = this.filtersData;
 		const filterData = {
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
+			...this.filtersData
 		};
-		Object.keys({
-			volume,
-			equalizer,
-			karaoke,
-			timescale,
-			tremolo,
-			vibrato,
-			rotation,
-			distortion
-		}).forEach((key) => {
+		this.set("beforeDeleteFilters", filterData);
+		Object.keys(filterData).forEach((key) => {
 			if (
 				!filterData[key] ||
 				filterData[key] === undefined ||
 				(Array.isArray(filterData[key]) && filterData[key].length === 0)
 			) {
-				filterData[key] = undefined;
+				delete filterData[key];
 			}
 		});
+		this.set("afterDeleteFilters", filterData);
 		void this.node.send({
 			op: "filters",
 			guildId: this.guild,
