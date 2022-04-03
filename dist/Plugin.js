@@ -23,7 +23,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             vibrato: false,
             earrape: false,
             tremolo: false,
-            distortion: false,
+            distortion: false
         };
     }
     /**
@@ -35,14 +35,19 @@ class Player extends erela_js_1.Structure.get("Player") {
         if (!status) {
             this.filters.nightcore = false;
             this.filtersData.timescale = {};
+            this.filtersData.equalizer = [];
             return this.updateFilters();
         }
         this.filters.nightcore = true;
         this.filters.daycore = false;
+        this.filtersData.equalizer = [
+            { band: 0, gain: 0.3 },
+            { band: 1, gain: 0.3 }
+        ];
         this.filtersData.timescale = {
-            speed: 1.0,
+            speed: 1.189,
             pitch: 1.2,
-            rate: 1.0,
+            rate: 1.0
         };
         return this.updateFilters();
     }
@@ -81,7 +86,7 @@ class Player extends erela_js_1.Structure.get("Player") {
         this.filters.tremolo = false;
         this.filtersData.equalizer = [
             { band: 1, gain: 0.3 },
-            { band: 0, gain: 0.3 },
+            { band: 0, gain: 0.3 }
         ];
         this.filtersData.timescale = { pitch: 0.5 };
         this.filtersData.tremolo = { depth: 0.3, frequency: 14 };
@@ -114,7 +119,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             { band: 10, gain: 0 },
             { band: 11, gain: 0 },
             { band: 12, gain: 0 },
-            { band: 13, gain: 0 },
+            { band: 13, gain: 0 }
         ];
         return this.updateFilters();
     }
@@ -147,20 +152,21 @@ class Player extends erela_js_1.Structure.get("Player") {
         this.filters.treblebass = true;
         this.filters.pop = false;
         this.filtersData.equalizer = [
-            { band: 0, gain: 0.6 },
-            { band: 1, gain: 0.67 },
-            { band: 2, gain: 0.67 },
-            { band: 3, gain: 0 },
-            { band: 4, gain: -0.5 },
-            { band: 5, gain: 0.15 },
-            { band: 6, gain: -0.45 },
-            { band: 7, gain: 0.23 },
-            { band: 8, gain: 0.35 },
-            { band: 9, gain: 0.45 },
-            { band: 10, gain: 0.55 },
-            { band: 11, gain: 0.6 },
-            { band: 12, gain: 0.55 },
+            { band: 0, gain: 0.125 },
+            { band: 1, gain: 0.125 },
+            { band: 2, gain: 0.25 },
+            { band: 3, gain: 0.375 },
+            { band: 4, gain: 0 },
+            { band: 5, gain: 0 },
+            { band: 6, gain: 0 },
+            { band: 7, gain: 0 },
+            { band: 8, gain: 0 },
+            { band: 9, gain: 0 },
+            { band: 10, gain: 0 },
+            { band: 11, gain: 0 },
+            { band: 12, gain: 0 },
             { band: 13, gain: 0 },
+            { band: 14, gain: 0 }
         ];
         return this.updateFilters();
     }
@@ -195,7 +201,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             level: 1.0,
             monoLevel: 1.0,
             filterBand: 220.0,
-            filterWidth: 100.0,
+            filterWidth: 100.0
         };
         return this.updateFilters();
     }
@@ -248,7 +254,7 @@ class Player extends erela_js_1.Structure.get("Player") {
         this.filtersData.equalizer = [
             ...Array(6)
                 .fill(0)
-                .map((n, i) => ({ band: i, gain: 0.5 })),
+                .map((n, i) => ({ band: i, gain: 0.5 }))
         ];
         this.filtersData.volume = 5.0;
         return this.updateFilters();
@@ -273,7 +279,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             tanOffset: 0,
             tanScale: 1,
             offset: 0,
-            scale: 1,
+            scale: 1
         };
         return this.updateFilters();
     }
@@ -283,7 +289,7 @@ class Player extends erela_js_1.Structure.get("Player") {
      * @returns {Player}
      */
     updateFilters(seek = true) {
-        const { volume, equalizer, karaoke, timescale, tremolo, vibrato, rotation, distortion, } = this.filtersData;
+        const { volume, equalizer, karaoke, timescale, tremolo, vibrato, rotation, distortion } = this.filtersData;
         const filterData = {
             volume,
             equalizer,
@@ -292,8 +298,9 @@ class Player extends erela_js_1.Structure.get("Player") {
             tremolo,
             vibrato,
             rotation,
-            distortion,
+            distortion
         };
+        console.debug("before", JSON.stringify(filterData, null, 2));
         Array.from(Object.entries({
             volume,
             equalizer,
@@ -302,7 +309,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             tremolo,
             vibrato,
             rotation,
-            distortion,
+            distortion
         })).forEach(([key, value]) => {
             switch (typeof value) {
                 case "object": {
@@ -317,6 +324,7 @@ class Player extends erela_js_1.Structure.get("Player") {
                 }
             }
         });
+        console.debug("after", JSON.stringify(filterData, null, 2));
         void this.node.send(Object.assign({ op: "filters", guildId: this.guild }, filterData));
         if (!seek)
             return this;
@@ -330,7 +338,7 @@ class Player extends erela_js_1.Structure.get("Player") {
     clearFilters(seek = true) {
         void this.node.send({
             op: "filters",
-            guildId: this.guild,
+            guildId: this.guild
         });
         this.filtersData = new filterConstants_1.filterConstants();
         this.filters = {
@@ -345,7 +353,7 @@ class Player extends erela_js_1.Structure.get("Player") {
             vibrato: false,
             earrape: false,
             tremolo: false,
-            distortion: false,
+            distortion: false
         };
         if (!seek)
             return this;
