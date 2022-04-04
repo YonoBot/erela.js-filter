@@ -12,56 +12,56 @@ class filterConstants {
 					? void 0
 					: _a.equalizer) !== null && _b !== void 0
 				? _b
-				: [];
+				: undefined;
 		this.karaoke =
 			(_d =
 				(_c = this.filterOptions) === null || _c === void 0
 					? void 0
 					: _c.karaoke) !== null && _d !== void 0
 				? _d
-				: {};
+				: undefined;
 		this.timescale =
 			(_f =
 				(_e = this.filterOptions) === null || _e === void 0
 					? void 0
 					: _e.timescale) !== null && _f !== void 0
 				? _f
-				: {};
+				: undefined;
 		this.tremolo =
 			(_h =
 				(_g = this.filterOptions) === null || _g === void 0
 					? void 0
 					: _g.tremolo) !== null && _h !== void 0
 				? _h
-				: {};
+				: undefined;
 		this.vibrato =
 			(_k =
 				(_j = this.filterOptions) === null || _j === void 0
 					? void 0
 					: _j.vibrato) !== null && _k !== void 0
 				? _k
-				: {};
+				: undefined;
 		this.rotation =
 			(_m =
 				(_l = this.filterOptions) === null || _l === void 0
 					? void 0
 					: _l.rotation) !== null && _m !== void 0
 				? _m
-				: {};
+				: undefined;
 		this.distortion =
 			(_p =
 				(_o = this.filterOptions) === null || _o === void 0
 					? void 0
 					: _o.distortion) !== null && _p !== void 0
 				? _p
-				: {};
+				: undefined;
 		this.lowpass =
 			(_r =
 				(_q = this.filterOptions) === null || _q === void 0
 					? void 0
 					: _q.lowpass) !== null && _r !== void 0
 				? _r
-				: {};
+				: undefined;
 	}
 }
 exports.filterConstants = filterConstants;
