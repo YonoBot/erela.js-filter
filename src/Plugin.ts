@@ -4,7 +4,7 @@ import { filterConstants } from "./Util/filterConstants";
  * Represents a extended Player class
  * @extends {Player}
  */
-class Player extends Structure.get("Player") {
+export class Player extends Structure.get("Player") {
 	public filtersData = new filterConstants();
 	public filters = {
 		nightcore: false,

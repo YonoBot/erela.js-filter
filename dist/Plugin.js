@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.erelaFilters = void 0;
+exports.erelaFilters = exports.Player = void 0;
 const erela_js_1 = require("erela.js");
 const filterConstants_1 = require("./Util/filterConstants");
 /**
@@ -338,6 +338,7 @@ class Player extends erela_js_1.Structure.get("Player") {
 		return this.seek(this.position);
 	}
 }
+exports.Player = Player;
 class erelaFilters extends erela_js_1.Plugin {
 	load() {
 		return erela_js_1.Structure.extend("Player", () => Player);
